@@ -1,3 +1,5 @@
+import styles from './SubscriptionCard.module.css'
+
 interface Subscription {
   id: string;
   offerTitle: string;
@@ -17,12 +19,12 @@ const SubscriptionCard = ( {subscription}: {subscription: Subscription}) => {
   });
 
   return (
-    <div>
+    <div className={styles.card}>
       <h3>{offerTitle}</h3>
+      <hr />
       <p>Status: {status}</p>
       <p>Price: {currency} {price}</p>
       <p>Renews on: {formattedDate}</p>
-      <hr />
     </div>
   );
 }

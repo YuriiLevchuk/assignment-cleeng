@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import fetchSubscriptions from '../../mock-api/api';
 import SubscriptionCard from '../SubscriptionCard/SubscriptionCard.tsx';
 
+import styles from './SubscriptionList.module.css';
+
 interface Subscription {
   id: string;
   offerTitle: string;
@@ -35,7 +37,7 @@ export function SubscriptionsList() {
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
 
   return (
-    <div>
+    <div className={styles.container}>
       {subscriptions.map((sub) => (
         <SubscriptionCard key={sub.id} subscription={sub} />
       ))}

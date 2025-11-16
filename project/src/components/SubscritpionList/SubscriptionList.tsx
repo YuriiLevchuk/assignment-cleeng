@@ -1,42 +1,31 @@
-import { useEffect, useState } from 'react';
-import fetchSubscriptions from '../../mock-api/api';
+import { useEffect } from 'react';
 import SubscriptionCard from '../SubscriptionCard/SubscriptionCard.tsx';
 
-interface Subscription {
-  id: string;
-  offerTitle: string;
-  status: string;
-  price: number;
-  currency: string;
-  nextPaymentDate: string;
-}
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSubscriptions } from '../../reducers/subscriptionReducer.tsx';
+import type { AppDispatch } from '../../store.tsx';
+import type { RootState } from '../../store.tsx';
+
+import styles from './SubscriptionList.module.css';
+
+
 
 export function SubscriptionsList() {
-  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useDispatch<AppDispatch>();
+  const { items, loading, error } = useSelector(
+    (state: RootState) => state.subscriptions
+  );
 
   useEffect(() => {
-    const loadData = async() => {
-      try {
-        const data = await fetchSubscriptions();
-        setSubscriptions(data as Subscription[]);
-      } catch (err) {
-        setError(`Failed to load subscriptions.\nError: ${err}`);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadData();
-  }, []);
+    dispatch(fetchSubscriptions());
+  }, [dispatch]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
 
   return (
-    <div>
-      {subscriptions.map((sub) => (
+    <div className={styles.container}>
+      {items.map((sub) => (
         <SubscriptionCard key={sub.id} subscription={sub} />
       ))}
     </div>

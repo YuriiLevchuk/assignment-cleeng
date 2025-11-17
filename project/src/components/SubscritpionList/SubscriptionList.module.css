@@ -11,6 +11,16 @@
   gap: 1em;
 }
 
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  height: 100vh;
+  text-align: center;
+}
+
+
 @media (max-width: 600px) {
   .container {
     margin-top: 20px;

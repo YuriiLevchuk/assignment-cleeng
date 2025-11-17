@@ -20,8 +20,8 @@ export function SubscriptionsList() {
     dispatch(fetchSubscriptions());
   }, [dispatch]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
+  if (loading) return <div className={styles.centered}>Loading...</div>;
+  if (error) return <div className={styles.centered} style={{ color: 'red' }}>{error}</div>;
 
   return (
     <div className={styles.container}>

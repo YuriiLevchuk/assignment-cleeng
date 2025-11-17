@@ -3,16 +3,16 @@
   padding: 10px;
   margin: 10px;
   border-radius: 6px;
-  transition: all 0.3s ease;
 
-  height: 350px;
+  height: auto;
+  max-height: 250px;
   width: 200px;
 }
 
 .card h3 {
   margin: 0;
   padding: 0;
-  font-size: 2em;
+  font-size: 1.8em;
 }
 
 .card p {
@@ -29,5 +29,46 @@
 .card:hover {
   border-color: #0070f3;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cancelButton {
+  display: block;
+  margin: 15px auto 0 auto;
+  
+  width: 100%;
+  padding: 8px 12px;
+
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.cancelButton:hover {
+  background-color: #0070f3;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
+}
+
+.cancelButton:disabled {
+  background-color: #aaa;
+  color: #FFF;
+  cursor: default;
+
+  transform: none;
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 86vw;
+  }
+
+  .card:not(:last-child) {
+    margin-bottom: 20px;
+  }
 }

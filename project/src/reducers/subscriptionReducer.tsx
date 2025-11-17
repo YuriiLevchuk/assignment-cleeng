@@ -25,7 +25,13 @@ const initialState: SubscriptionsState = {
 const subscriptionsSlice = createSlice({
   name: 'subscriptions',
   initialState,
-  reducers: {},
+  reducers: {
+    cancelSubscription: (state, action) => {
+      const id = action.payload;
+      const sub = state.items.find((s) => s.id === id);
+      if (sub) sub.status = 'canceled';
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchSubscriptions.pending, (state) => {
@@ -56,5 +62,7 @@ export const fetchSubscriptions = createAsyncThunk(
   }
 );
 
+export const { cancelSubscription } = subscriptionsSlice.actions;
+export type { Subscription };
 export default subscriptionsSlice.reducer;
 
